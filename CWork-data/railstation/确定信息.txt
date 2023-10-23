@@ -1,0 +1,19 @@
+//站点信息（顺序表）
+typedef struct station
+{
+	char name_chinese[64];//站点中文名字
+	char name_english[64];//站点英文名字
+	int arrive_time;//到站时间
+	int door;//开门方向
+	int change_line[64];//换乘路线
+	int last;//站点下标，也可以作为站点编号
+
+	/*站内信息（如出站口/厕所/换乘地点暂不考虑*/
+
+}Station;
+//车厢节点信息（顺序表）
+typedef struct box
+{
+	struct station *now_station //当前车站信息
+	int car_box;//车厢号
+}Box;
