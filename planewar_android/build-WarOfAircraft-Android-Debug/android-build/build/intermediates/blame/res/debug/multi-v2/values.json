@@ -1,0 +1,43 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\DATA_MEM\\Speedele2404\\planewar_android\\build-WarOfAircraft-Android-Debug\\android-build\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "D:\\DATA_MEM\\Speedele2404\\planewar_android\\build-WarOfAircraft-Android-Debug\\android-build\\res\\values\\libs.xml",
+                    "from": {
+                        "startLines": "-1,-1,13,-1",
+                        "startColumns": "-1,-1,4,-1",
+                        "startOffsets": "-1,-1,360,-1",
+                        "endLines": "-1,-1,22,-1",
+                        "endColumns": "-1,-1,12,-1",
+                        "endOffsets": "-1,-1,838,-1"
+                    },
+                    "to": {
+                        "startLines": "2,5,8,18",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,109,342,823",
+                        "endLines": "4,7,17,20",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "104,337,818,934"
+                    }
+                },
+                {
+                    "source": "C:\\Qt\\Qt5.14.2\\5.14.2\\android\\src\\android\\java\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "-1,-1,-1,-1",
+                        "startColumns": "-1,-1,-1,-1",
+                        "startOffsets": "-1,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "21,22,23,24",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "939,1047,1169,1281",
+                        "endColumns": "107,121,111,97",
+                        "endOffsets": "1042,1164,1276,1374"
+                    }
+                }
+            ]
+        }
+    ]
+}

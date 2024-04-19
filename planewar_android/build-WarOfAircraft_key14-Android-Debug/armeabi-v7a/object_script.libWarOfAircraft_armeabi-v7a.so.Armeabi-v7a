@@ -1,0 +1,15 @@
+armeabi-v7a/main.obj
+armeabi-v7a/map.obj
+armeabi-v7a/gamebutton.obj
+armeabi-v7a/mainwindow.obj
+armeabi-v7a/myhero.obj
+armeabi-v7a/bullet.obj
+armeabi-v7a/enemyplane.obj
+armeabi-v7a/movevector.obj
+armeabi-v7a/displayhp.obj
+armeabi-v7a/scoreboard.obj
+armeabi-v7a/magazinedisplay.obj
+armeabi-v7a/bombchange.obj
+armeabi-v7a/qrc_res.obj
+armeabi-v7a/moc_gamebutton.obj
+armeabi-v7a/moc_mainwindow.obj

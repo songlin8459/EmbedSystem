@@ -1,0 +1,15 @@
+arm64-v8a/main.obj
+arm64-v8a/map.obj
+arm64-v8a/gamebutton.obj
+arm64-v8a/mainwindow.obj
+arm64-v8a/myhero.obj
+arm64-v8a/bullet.obj
+arm64-v8a/enemyplane.obj
+arm64-v8a/movevector.obj
+arm64-v8a/displayhp.obj
+arm64-v8a/scoreboard.obj
+arm64-v8a/magazinedisplay.obj
+arm64-v8a/bombchange.obj
+arm64-v8a/qrc_res.obj
+arm64-v8a/moc_gamebutton.obj
+arm64-v8a/moc_mainwindow.obj
