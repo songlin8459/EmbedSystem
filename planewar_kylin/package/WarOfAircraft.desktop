@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=WarofAircraft
+Exec=/home/kylin/PlaneWar/run.sh
+Icon=/home/kylin/PlaneWar/icon_launcher.png
+Type=Application
+Terminal=true
+Categories=Developer;
