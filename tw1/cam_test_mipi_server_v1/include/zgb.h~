@@ -1,0 +1,208 @@
+#ifndef __ZIGBEE_H__
+#define __ZIGBEE_H__
+#include <pthread.h>
+
+#define  MAX_COM_NUM 3
+typedef unsigned char uint8_t;
+typedef signed char int8_t;
+typedef unsigned int uint32_t;
+typedef unsigned short uint16_t;
+typedef signed short int16_t;
+/****************定义消息头***************************/
+#define start_machine_t 0xAA //开机
+#define data_flow_t 0xBB //数据采集
+#define rfid_msg_t 0xCC //rfid 信息
+#define command_tag_t 0xDD //命令
+#define key_msg_t 0xEE //按键
+#define other_type_t 0x00 //其他（未定义）
+/*****************************************************/
+
+/******************长度*******************************/
+#define tem_len sizeof(tem_t)
+#define hum_len sizeof(hum_t)
+#define state_len sizeof(state_t)
+#define adc_len sizeof(adc_t)
+#define acc_len sizeof(acc_t)
+#define light_len sizeof(light_t)
+#define data_len sizeof(data_t)
+#define rfid_len sizeof(rfid_t)
+#define env_len sizeof(env_msg_t)
+#define command_len sizeof(command_t)
+#define key_len sizeof(kkey_t)
+#define message_len sizeof(message_t)
+#define message_tag_len sizeof(message_tag_t)
+
+/*****************************************************/
+
+/******************控制命令***************************/
+#define on_led1 0//开LED1 灯
+#define off_led1 1 //关LED1 灯
+#define on_speaker 2 //开蜂鸣器
+#define off_speaker 3 //关蜂鸣器
+#define on_fan 4 //开风扇
+#define on_fan_low 5 //使风扇工作在低速状态
+#define on_fan_mid 6 //使风扇工作在中速状态
+#define on_fan_high 7 //使风扇工作在高速状态	
+#define off_fan 8 //关风扇
+#define on_seven_led 9 //开数码管
+#define off_seven_led 10 //关数码管
+#define off_machine 11 //关机器
+/*****************************************************/
+
+/***********************设备id************************/
+#define buzz_id 1 //蜂鸣器ID 设置为1
+#define fan_id 2 //风扇ID 设置为2
+#define seven_led_id 3 //数码管ID 设置为3
+#define led12_id 4 //LED1 ID 设置为4
+#define led2_id 5 //LED2 ID 设置为5
+typedef struct _rfid_t //RFID 相关信息，根据操作的不同填充不同部分
+{
+	uint32_t id; //序列号
+	uint8_t datablock[16]; //数据块
+	uint8_t purse[4]; //钱包
+	uint8_t eeprom[4]; //E2PROM 值
+}rfid_t;
+
+typedef struct _command_t
+{
+	uint8_t operate_id; //定义操作对象
+	uint8_t operation; //定义对象需要的操作
+}command_t;
+
+typedef struct _tem_t
+{
+	uint8_t ltem;
+	uint8_t htem;
+}tem_t; //温度信息
+
+typedef struct _hum_t //湿度信息
+{
+	uint8_t lhum;
+	uint8_t hhum;
+}hum_t;
+
+typedef struct _acc_t //三轴加速度信息
+{
+	int8_t x;
+	int8_t y;
+	int8_t z;
+}acc_t;
+
+typedef struct _ad0_t
+{
+	uint8_t ad0;
+	uint8_t nul_1;
+	uint8_t nul_2;
+	uint8_t nul_3;
+}ad0_t;
+
+typedef struct _ad1_t
+{
+	uint8_t ad1;
+	uint8_t nul_1;
+	uint8_t nul_2;
+	uint8_t nul_3;
+}ad1_t;
+
+typedef struct _adc_t //A/D 转换信息
+{
+	ad0_t ad0; //data from A/D channel 0
+	ad1_t ad1; //data from A/D channel 1，采集电池电压
+} adc_t;
+
+typedef struct _light_t //光照信息
+{
+	uint8_t light;
+	uint8_t nul_1;
+	uint8_t nul_2;
+	uint8_t nul_3;
+} light_t;
+
+typedef struct _state_t //设备状态
+{
+	uint8_t led_state; //LED 灯状态
+	uint8_t fan_state; //风扇状态
+	uint8_t buzz_state; //蜂鸣器状态
+	uint8_t seven_led_state; //数码管状态
+} state_t;
+
+typedef struct _env_msg_t //环境信息
+{
+	tem_t tem; //温度
+	hum_t hum; //湿度
+	acc_t acc; //三轴加速度
+	adc_t adc; //A/D 转换
+	light_t light; //光照值
+	state_t state; //设备状态
+} env_msg_t;
+typedef struct _kkey_t //M0 按键定义
+{
+	uint8_t key_all;
+}kkey_t;
+
+typedef struct _other_type_d
+{
+	uint8_t other_data[20]; //其他数据信息
+} other_type_d;
+
+typedef union _data_t //可选择发送的信息类型
+{
+	rfid_t rfid; //射频卡信息
+	command_t command; //命令信息
+	env_msg_t env_msg; //环境信息
+	kkey_t key; //按键信息
+	other_type_d other_msg; //其他类型信息
+} data_t;
+
+typedef struct _crc_t
+{
+	uint8_t lcrc;
+	uint8_t hcrc;
+}crc_t;
+struct zgb_buf_t {
+	float tmp;//温度
+	float hum;//湿度
+	float ill;//
+	float adc0;
+	float adc1;
+	 acc_t acc;//陀螺仪
+	 key_t key;
+	 rfid_t rfid;
+};
+
+
+typedef enum _message_tag_t
+{
+	start_machine = start_machine_t, //开启设备
+	data_flow = data_flow_t, //数据流
+	rfid_msg = rfid_msg_t, //射频卡信息
+	command = command_tag_t, //命令
+	key = key_msg_t, //按键
+	other_type = other_type_t
+		//其他类型
+}message_tag_t;
+typedef struct _message_t//发送消息格式
+{
+	message_tag_t tag; //消息头，区分消息类型
+//	uint8_t tag; //消息头，区分消息类型
+	uint8_t address; //从机地址，区分不同	FS_11C14 设备
+	uint8_t data_length; //数据长度
+	data_t data; //数据流
+	crc_t crc; //CRC 校验码
+}message_t;
+
+
+
+extern struct zgb_buf_t zgb;
+extern uint8_t M0_CMD;//M0控制命令
+extern uint8_t env_msg[11];//环境信息env_msg协议BUF：头是：env
+int open_urat(int com_port);
+void urat_init(void);
+int get_env(message_t *mgs);
+int read_env(message_t *mgs);
+int flag_dev(void);
+int send_m0_cmd(uint8_t M0_CMD);
+
+/**********zgb模块接口**********/
+int zgb_main(void);
+#endif

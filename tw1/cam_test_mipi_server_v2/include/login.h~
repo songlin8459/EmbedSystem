@@ -1,0 +1,17 @@
+#ifndef __LOGIN_H__
+#define __LOGIN_H__
+
+#include <sqlite3.h>
+#include "module.h"
+
+typedef struct{
+	int type;
+	char name[16];
+	char data[128];
+} MSG;
+
+
+void App_Regist(int connfd, MSG *pbuf, sqlite3 *db);
+void App_Login(int connfd, MSG *pbuf, sqlite3 *db);
+
+#endif
